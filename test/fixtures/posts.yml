@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  image_id: MyString
+  place: MyString
+  description: MyText
+  evaluation: 1.5
+  year: MyText
+  month: MyText
+  date: MyText
+  adress: MyText
+  latitude: 1.5
+  longitude: 1.5
+
+two:
+  user_id: 1
+  image_id: MyString
+  place: MyString
+  description: MyText
+  evaluation: 1.5
+  year: MyText
+  month: MyText
+  date: MyText
+  adress: MyText
+  latitude: 1.5
+  longitude: 1.5
