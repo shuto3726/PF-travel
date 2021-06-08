@@ -1,0 +1,11 @@
+h1 新規登録
+= form_with model:@post, local:true do |f|
+  h4 画像
+  = f.attachment_field :image
+  h4 スポット名
+  = f.text_field :place
+  h4 紹介文
+  = f.text_area :description
+  h4 住所
+  = f.text_field :adress
+  = f.submit '投稿'

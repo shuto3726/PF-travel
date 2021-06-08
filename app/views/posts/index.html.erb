@@ -1,2 +1,14 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<% @posts.each do |post| %>
+<div>
+  <%= attachment_image_tag post, :image %>
+  
+  <p>スポット名
+    <%= link_to post_path(post.id) do %>
+      <%= post.place%>
+    <% end %>
+  </p>
+  
+  <p>紹介文:<%= post.description %></p>
+  <p>住所:<%= post.adress %></p>
+</div>
+<% end %>

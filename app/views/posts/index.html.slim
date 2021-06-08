@@ -1,0 +1,9 @@
+- @posts.each do |post|
+div
+  = attachment_image_tag @post, :image
+  p スポット名 
+  = @posts.name
+  p 
+    |  紹介文:= post.description 
+  p
+    |  住所:= post.adress
