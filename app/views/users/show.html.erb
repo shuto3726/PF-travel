@@ -1,0 +1,23 @@
+<div class="profile-container">
+  <h3 class="profile-name"><%= @user.name %></h3>
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <% if @user.id == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+    <p><%= link_to "退会する", user_path(current_user.id), method: :delete %></p>
+  <% end %>
+</div>
+<% @posts.each do |post| %>
+<div>
+  <%= attachment_image_tag post, :image %>
+
+  <p>スポット名
+    <%= link_to post_path(post.id) do %>
+      <%= post.place%>
+    <% end %>
+  </p>
+
+  <p>紹介文:<%= post.description %></p>
+  <p>住所:<%= post.adress %></p>
+</div>
+<% end %>
+<%= paginate @posts %>

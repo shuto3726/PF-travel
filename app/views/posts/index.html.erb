@@ -10,5 +10,7 @@
   
   <p>紹介文:<%= post.description %></p>
   <p>住所:<%= post.adress %></p>
+  <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
 </div>
 <% end %>
+<%= paginate @posts %>
