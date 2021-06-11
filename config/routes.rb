@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
+  resources :tags do
+    get 'posts', to: 'posts#search'
+  end
+  
   resources :users, only: [:show, :edit, :update, :destroy]
 
 end
