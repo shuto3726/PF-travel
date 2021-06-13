@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/show'
   root to: 'homes#top'
   devise_for :users
   
@@ -11,6 +10,9 @@ Rails.application.routes.draw do
     get 'posts', to: 'posts#search'
   end
   
-  resources :users, only: [:show, :edit, :update, :destroy]
-
+  resources :users, only: [:index, :show, :edit, :update, :destroy] do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end
 end

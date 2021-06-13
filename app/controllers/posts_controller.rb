@@ -8,9 +8,9 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag_name].split(nil)
     if @post.save
       @post.save_tag(tag_list)                         
-      redirect_back(fallback_location: root_path)          
+      redirect_to posts_path(@post)          
     else
-      redirect_back(fallback_location: root_path)          
+      redirect_to posts_path(@post)
     end
   end
 
