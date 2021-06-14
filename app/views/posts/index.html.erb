@@ -1,22 +1,22 @@
 <h3>タグリスト</h3>
-
 <% @tag_list.each do |list| %>
   <span>
     <%= link_to list.tag_name, tag_posts_path(tag_id: list.id) %>
     <%= "(#{list.posts.count})" %>
+
   </span>
 <% end %>
 
 <% @posts.each do |post| %>
 <div>
   <%= attachment_image_tag post, :image %>
-  
+
   <p>スポット名
     <%= link_to post_path(post.id) do %>
       <%= post.place%>
     <% end %>
   </p>
-  
+
   <p>紹介文:<%= post.description %></p>
   <p>住所:<%= post.adress %></p>
   <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>

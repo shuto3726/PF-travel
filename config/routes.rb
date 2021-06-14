@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'posts', to: 'posts#search'
   end
   
+  
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
