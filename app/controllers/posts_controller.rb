@@ -7,8 +7,8 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
     tag_list = params[:post][:tag_name].split(nil)
     if @post.save
-      @post.save_tag(tag_list)                         
-      redirect_to posts_path(@post)          
+      @post.save_tag(tag_list)
+      redirect_to posts_path(@post)
     else
       redirect_to posts_path(@post)
     end
@@ -24,6 +24,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post_tags = @post.tags
     @comment = Comment.new
+    @review = Review.new
   end
 
   def edit

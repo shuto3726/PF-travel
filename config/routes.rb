@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
+    resources :reviews, only: [:index, :create]
   end
   resources :tags do
     get 'posts', to: 'posts#search'

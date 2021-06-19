@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   attachment :profile_image
   
   # 自分がフォローされる（被フォロー）側の関係性
