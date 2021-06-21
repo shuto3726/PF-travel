@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'posts', to: 'posts#search'
   end
   
+  get '/map_request', to: 'maps#map', as: 'map_request'
   
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resource :relationships, only: [:create, :destroy]

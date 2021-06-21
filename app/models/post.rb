@@ -4,8 +4,8 @@ class Post < ApplicationRecord
   has_many :tags, through: :tag_maps
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :reviews, dependent: :destroy
-
+  
+  
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
@@ -23,6 +23,8 @@ class Post < ApplicationRecord
     end
   end
   
-  
   attachment :image
+#map表示
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 end

@@ -6,7 +6,7 @@
   <%= attachment_image_tag @post, :image %>
   <p>スポット名:<%= @post.place%></p>
   <p>紹介文:<%= @post.description %></p>
-  <p>住所:<%= @post.adress %></p>
+  <p>住所:<%= @post.address %></p>
   <p><%= "タグ: " %></p>
   <% @post_tags.each do |tag| %>
     <span>
@@ -38,19 +38,83 @@
   <% @post.comments.each do |comment| %>
     <%= comment.user.name %>
     <%= comment.comment %>
+    <div class="post-evaluation" data-score="<%= comment.evaluation %>"></div>
     <% if comment.user == current_user %>
     <div class="comment-delete">
       <%= link_to "削除", post_comment_path(comment.post,comment), method: :delete %>
     </div>
     <% end %>
   <% end %>
+  <%#= @posts.each do |post| %>
+    <!-- div class="post-evaluation" data-score="<%#= post.evaluation %>"></div -->
+  <%# end %>
 </div>
+<script>
+  $('.post-evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>
 
-<div class="new-comment">
-  <%= form_with(model:[@post, @comment], local: true) do |f| %>
+<%= form_with(model:[@post, @comment], local: true) do |f| %>
+  <div class="new-comment">
     <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  </div>
+  <div id="evaluate_stars">
+    <label>評価</label>
+  </div>
+  <div class="action">
     <%= f.submit "送信する" %>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
-<%= render 'reviews/form', review: @review, post: @post %>
+<script>
+  $('#evaluate_stars').raty({
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    scoreName: 'comment[evaluation]'
+  });
+</script>
+
+<div id="map"></div>
+<style>
+  #map{
+    height: 150px;
+    width: 270px;
+  }
+</style>
+<script type="text/javascript">
+
+  function initMap() {
+    var test ={lat: <%= @post.latitude %>, lng: <%= @post.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: test
+    });
+
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = '住所：<%= @post.address %>';
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+        position:test,
+        map: map,
+        title: contentString
+    });
+
+    marker.addListener('click', function() {
+         infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+</script>
+

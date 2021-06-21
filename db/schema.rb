@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_18_073322) do
+ActiveRecord::Schema.define(version: 2021_06_20_063641) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_06_18_073322) do
     t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "evaluation"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -35,12 +36,12 @@ ActiveRecord::Schema.define(version: 2021_06_18_073322) do
     t.text "year"
     t.text "month"
     t.text "date"
-    t.text "adress"
     t.float "latitude"
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "address"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

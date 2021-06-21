@@ -9,7 +9,7 @@
 
 <% @posts.each do |post| %>
 <div>
-  <%= attachment_image_tag post, :image %>
+  <%= attachment_image_tag post, :image, %>
 
   <p>スポット名
     <%= link_to post_path(post.id) do %>
@@ -18,8 +18,26 @@
   </p>
 
   <p>紹介文:<%= post.description %></p>
-  <p>住所:<%= post.adress %></p>
+  <p>住所:<%= post.address %></p>
   <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
+  <table border=0>
+    <tr><td>
+  <p class="post-evaluation" data-score="<%= post.comments.average(:evaluation) %>"></p></td><td style="padding-left:10px;">
+  <p><%= post.comments.average(:evaluation) %>/5</p></td>
+  </tr>
+  </table>
 </div>
 <% end %>
+<script>
+  $('.post-evaluation').raty({
+    readOnly: true,
+    half: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>
+
+
 <%= paginate @posts %>

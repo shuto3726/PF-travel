@@ -22,9 +22,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @posts = Post.all
     @post_tags = @post.tags
     @comment = Comment.new
-    @review = Review.new
   end
 
   def edit
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_to user_path(current_user.id)
   end
 
   def search
@@ -49,8 +49,14 @@ class PostsController < ApplicationController
     @posts = @tag.posts.all
   end
 
+  def map
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def post_params
-    params.require(:post).permit(:image, :place, :description, :adress)
+    params.require(:post).permit(:image, :place, :description, :address, :latitude, :longitude, :evaluation)
   end
 
 end
