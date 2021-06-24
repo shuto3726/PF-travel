@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 
   def favorites
     @user = User.find(params[:id])
+    @posts = @user.favorite_posts.page(params[:page]).reverse_order
     @prefectures = Prefecture.all
   end
 

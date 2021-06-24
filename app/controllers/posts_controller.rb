@@ -11,9 +11,10 @@ class PostsController < ApplicationController
 
   def index_by_prefecture
     @user = current_user
+    @prefectures = Prefecture.all
     if params[:prefecture_id].present?
       prefecture_id = params[:prefecture_id]
-      @posts = Post.where(prefecture_id: prefecture_id)
+      @posts = Post.where(prefecture_id: prefecture_id).page(params[:page]).reverse_order
     else
       @posts = Post.all
     end

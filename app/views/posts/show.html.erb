@@ -1,11 +1,10 @@
 <div class="row">
-  <div class="col-2 d-flex justify-content-center">
+  <div class="col-2 d-flex justify-content-center left-column">
     <div class="sticky-top sticky-side">
       <%= render"users/info", users:@users %>
     </div>
   </div>
   <div class="col-8 mx-2 mx-sm-auto mt-3">
-    <h1 class="mx-auto w-75">詳細</h1>
     <div class="card mx-auto w-75 text-center">
       <%= link_to post_path(@post.id), class: "btn btn-link w-100 text-secondary" do %>
         <object>
@@ -140,21 +139,12 @@
       <% end %>
     </div>
   </div>
-  <div class="col-2">
+  <div class="col-2 right-column">
     <%= render"posts/prefectures", posts:@posts %>
   </div>
 </div>
 
-
-<script>
-  $('.post-evaluation').raty({
-    readOnly: true,
-    score: function() {
-      return $(this).attr('data-score');
-    },
-    path: '/assets/'
-  });
-</script>
+<%= render "posts/evaluation", posts:@posts %>
 
 <script>
   $('#evaluate_stars').raty({
