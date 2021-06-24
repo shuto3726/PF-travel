@@ -1,0 +1,6 @@
+<% @prefectures.each do |prefecture| %>
+  <div>
+    <%= link_to prefecture.name, index_by_prefecture_posts_path(prefecture_id: prefecture.id) %>
+    (<%= Post.where(prefecture_id: prefecture.id).count %>)
+  </div>
+<% end %>

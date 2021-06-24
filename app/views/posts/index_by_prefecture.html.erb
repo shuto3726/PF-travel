@@ -1,0 +1,46 @@
+      <% @posts.each do |post| %>
+        <div class="card">
+          <div class="row">
+            <div class="col-4">
+              <%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %>
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= link_to post_path(post.id) do %>
+                    <%= post.place%>
+                  <% end %>
+                </h5>
+                <p><%= post.description %></p>
+                <table border=0>
+                  <tr><td>
+                <p class="post-evaluation" data-score="<%= post.comments.average(:evaluation) %>"></p></td><td style="padding-left:10px;">
+                <p><%= post.comments.average(:evaluation) %>/5</p></td>
+                </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            
+            <div class="col-3">
+              <p><%= link_to "コメント", post_path(post.id) %></p>
+            </div>
+            <div class="col-3">
+              <% if post.favorited_by?(current_user) %>
+                <p>
+                  <%= link_to post_favorites_path(post), method: :delete do %>
+                    ♥<%= post.favorites.count %> いいね
+                  <% end %>
+                </p>
+              <% else %>
+                <p>
+                  <%= link_to post_favorites_path(post), method: :post do %>
+                    ♡<%= post.favorites.count %> いいね
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>

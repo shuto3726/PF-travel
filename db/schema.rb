@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_20_063641) do
+ActiveRecord::Schema.define(version: 2021_06_22_155841) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -33,47 +33,25 @@ ActiveRecord::Schema.define(version: 2021_06_20_063641) do
     t.string "place"
     t.text "description"
     t.float "evaluation"
-    t.text "year"
-    t.text "month"
     t.text "date"
     t.float "latitude"
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "address"
+    t.integer "prefecture_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "prefectures", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_id"
-    t.string "content"
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_reviews_on_post_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
-  create_table "tag_maps", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_tag_maps_on_post_id"
-    t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "tag_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

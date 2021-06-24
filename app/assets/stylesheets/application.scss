@@ -16,3 +16,25 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+.sticky-top{
+  height : 4rem;
+}
+.sticky-side{
+  top: 4rem;
+  height : calc(100vh - 4rem);
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.left-column {
+  border-right: solid;
+  border-width: 1px;
+}
+
+.right-column {
+  border-left: solid;
+  border-width: 1px;
+}

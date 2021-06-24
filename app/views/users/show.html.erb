@@ -1,45 +1,77 @@
 
   <div class="row">
-    <div class="col-3">
-      <h3 class="profile-name"><%= @user.name %></h3>
-      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-      <p>follows<%= link_to @user.followings.count, user_followings_path(@user) %></p>
-      <p>followers<%= link_to @user.followers.count, user_followers_path(@user) %></p>
-      <% if @user.id == current_user.id %>
-        <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-        <p><%= link_to "退会する", user_path(current_user.id), method: :delete %></p>
-      <% else %>
-        <% if current_user.following?(@user) %>
-          <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
-        <% else %>
-          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
-        <% end %>
-      <% end %>
+    <div class="col-2 d-flex justify-content-center left-column">
+      <div class="sticky-top sticky-side">
+        <%= render"users/info", users:@users %>
+      </div>
     </div>
-    <div class="col-6">
-      <% @posts.each do |post| %>
-        <div class="card" style="max-width: 540px">
-          <div calss="row no-gutters">
-            <div class="col-6">
-              <%= attachment_image_tag post, :image, :fill, 100, 100 %>
-            </div>
-            <div class="col-6">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <%= link_to post_path(post.id) do %>
-                    <%= post.place%>
-                  <% end %>
-                </h5>
-                <p><%= post.description %></p>
-                <p>住所:<%= post.address %></p>
+    <div class="col-8">
+     <% @posts.each do |post| %>
+        <div class="card w-100 mx-auto mt-4 shadow-lg">
+          <%= link_to post_path(post.id), class: "btn btn-link w-100 text-secondary" do %>
+            <object>
+              <%= link_to user_path(@user.id), class: "btn btn-light w-100" do  %>
+                <div>
+                  <%= attachment_image_tag @user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg", class: "mt-1 ml-3 mr-3 rounded-circle" %>
+                  <%= @user.name %>
+                </div>
+              <% end %>
+            </object>
+            <div class="row">
+              <div class="col-4">
+                <%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %>
               </div>
+              <div class="col-8 text-left px-0">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= post.place%>
+                  </h5>
+                  <p><%= post.description %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-3 d-flex justify-content-center pr-0">
+              <%= link_to post_path(post.id), class: "btn btn-outline-secondary w-100" do %>
+                <div class="far fa-comments"></div>
+                <div>コメント</div>
+              <% end %>
+            </div>
+            <div class="col-3 d-flex justify-content-center p-0">
+              <% if post.favorited_by?(current_user) %>
+                  <%= link_to post_favorites_path(post), class: "btn btn-outline-secondary w-100", method: :delete do %>
+                    <div class="fas fa-heart"><%= post.favorites.count %></div>
+                    <div>お気に入り</div>
+                  <% end %>
+              <% else %>
+                  <%= link_to post_favorites_path(post), class: "btn btn-outline-secondary w-100", method: :post do %>
+                    <div class="far fa-heart"><%= post.favorites.count %></div>
+                    <div>お気に入り</div>
+                  <% end %>
+              <% end %>
+            </div>
+            <div class="col-3 d-flex justify-content-center p-0">
+              <%= link_to edit_post_path(post), class: "btn btn-outline-secondary w-100" do %>
+                <div class="far fa-edit"></div>
+                <div>編集</div>
+              <% end %>
+            </div>
+            <div class="col-3 d-flex justify-content-center pl-0">
+              <%= link_to post_path(post), class: "btn btn-outline-secondary w-100", method: :delete do %>
+                <div class="far fa-trash-alt"></div>
+                <div>削除</div>
+              <% end %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
-        
-    <div class="col-3">a</div>
+
+    <div class="col-2 right-column">
+      <p>都道府県一覧</p>
+      <%= render"posts/prefectures", posts:@posts %>
+    </div>
   </div>
 
 

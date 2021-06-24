@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    
     @posts = @user.posts.page(params[:page]).reverse_order
+    @prefectures = Prefecture.all
   end
 
   def edit
@@ -23,6 +23,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     redirect_to :root
+  end
+  
+  def favorites
+    @user = current_user
+    @prefectures = Prefecture.all
   end
   
   private

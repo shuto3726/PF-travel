@@ -5,26 +5,32 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    tag_list = params[:post][:tag_name].split(nil)
-    if @post.save
-      @post.save_tag(tag_list)
-      redirect_to posts_path(@post)
+    @post.save
+    redirect_to posts_path(@post)
+  end
+
+  def index_by_prefecture
+    @user = current_user
+    if params[:prefecture_id].present?
+      prefecture_id = params[:prefecture_id]
+      @posts = Post.where(prefecture_id: prefecture_id)
     else
-      redirect_to posts_path(@post)
+      @posts = Post.all
     end
   end
 
   def index
+    @user = current_user
     @posts = Post.page(params[:page]).reverse_order
-    @tag_list = Tag.all
     @post = current_user.posts.new
+    @prefectures = Prefecture.all
   end
 
   def show
+    @user = current_user
     @post = Post.find(params[:id])
-    @posts = Post.all
-    @post_tags = @post.tags
     @comment = Comment.new
+    @prefectures = Prefecture.all
   end
 
   def edit
@@ -43,12 +49,6 @@ class PostsController < ApplicationController
     redirect_to user_path(current_user.id)
   end
 
-  def search
-    @tag_list = Tag.all
-    @tag = Tag.find(params[:tag_id])
-    @posts = @tag.posts.all
-  end
-
   def map
     respond_to do |format|
       format.js
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:image, :place, :description, :address, :latitude, :longitude, :evaluation)
+    params.require(:post).permit(:image, :place, :description, :date, :latitude, :longitude, :prefecture_id )
   end
 
 end
