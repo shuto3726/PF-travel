@@ -12,7 +12,7 @@
           <%= link_to user_path(@user.id), class: "btn btn-light w-100" do  %>
             <div>
               <%= attachment_image_tag @user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg", class: "mt-1 ml-3 mr-3 rounded-circle" %>
-              <%= @user.name %>
+              <%= @post.user.name %>
             </div>
           <% end %>
         </object>
@@ -88,7 +88,7 @@
             <% end %>
           </div>
           <div class="col-6 d-flex justify-content-center pl-0">
-            <% if post.favorited_by?(current_user) %>
+            <% if @post.favorited_by?(current_user) %>
               <%= link_to post_favorites_path(@post), class: "btn btn-outline-secondary w-100", method: :delete do %>
                 <div class="fas fa-heart"><%= @post.favorites.count %></div>
                 <div>お気に入り</div>

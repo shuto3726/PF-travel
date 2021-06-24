@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root to: 'homes#top'
   devise_for :users
-  post '/home/guest_sign_in', to: 'homes#new_guest'
+  devise_scope :user do
+    post '/users/guest_sign_in', to: 'users/sessions#new_guest'
+  end
   
   
   resources :posts do
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
   get '/map_request', to: 'maps#map', as: 'map_request'
   
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
-    collection do
+    member do
       get :favorites
     end
     resource :relationships, only: [:create, :destroy]

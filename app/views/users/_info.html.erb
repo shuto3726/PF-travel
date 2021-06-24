@@ -11,6 +11,6 @@
     <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
   <% end %>
 <% end %>
-<p><%= link_to "お気に入り一覧", favorites_users_path %></p>
+<p><%= link_to "お気に入り一覧", favorites_user_path(@user.id) %></p>
 
 <p><%= button_to '新規投稿', {controller: "posts", action: "new"}, {method: :get} %></p>
