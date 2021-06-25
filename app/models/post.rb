@@ -3,14 +3,13 @@ class Post < ApplicationRecord
   belongs_to :prefecture
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  
-  
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
-  
+
   attachment :image
-#map表示
+
   geocoded_by :place
   after_validation :geocode, if: :place_changed?
 end

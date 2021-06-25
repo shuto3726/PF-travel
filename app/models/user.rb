@@ -11,17 +11,12 @@ class User < ApplicationRecord
 
   attachment :profile_image
 
-  # 自分がフォローされる（被フォロー）側の関係性
-  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  # 自分がフォローする（与フォロー）側の関係性
-  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  # 被フォロー関係を通じて参照→自分をフォローしている人
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :relationships, source: :followed
 
   def follow(user_id)
-    #createはnewとsaveを合わせた挙動
     relationships.create(followed_id: user_id)
   end
 
@@ -36,8 +31,7 @@ class User < ApplicationRecord
   def self.guest
     find_or_create_by(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.name = "ゲスト"
+      user.name = 'ゲスト'
     end
   end
-
 end

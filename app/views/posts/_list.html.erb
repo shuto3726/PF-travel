@@ -38,17 +38,7 @@
           <% end %>
         </div>
         <div class="col-3 d-flex justify-content-center p-0">
-          <% if post.favorited_by?(current_user) %>
-            <%= link_to post_favorites_path(post), class: "btn btn-outline-secondary w-100", method: :delete do %>
-              <div class="fas fa-heart"><%= post.favorites.count %></div>
-              <div>お気に入り</div>
-            <% end %>
-          <% else %>
-            <%= link_to post_favorites_path(post), class: "btn btn-outline-secondary w-100", method: :post do %>
-              <div class="far fa-heart"><%= post.favorites.count %></div>
-              <div>お気に入り</div>
-            <% end %>
-          <% end %>
+          <%= render 'favorites/favorite-btn', post: post %>
         </div>
         <div class="col-3 d-flex justify-content-center p-0">
           <%= link_to edit_post_path(post), class: "btn btn-outline-secondary w-100" do %>
@@ -70,17 +60,7 @@
           <% end %>
         </div>
         <div class="col-6 d-flex justify-content-center pl-0">
-          <% if post.favorited_by?(current_user) %>
-            <%= link_to post_favorites_path(post), class: "btn btn-outline-secondary w-100", method: :delete do %>
-              <div class="fas fa-heart"><%= post.favorites.count %></div>
-              <div>お気に入り</div>
-            <% end %>
-          <% else %>
-            <%= link_to post_favorites_path(post), class: "btn btn-outline-secondary w-100", method: :post do %>
-              <div class="far fa-heart"><%= post.favorites.count %></div>
-              <div>お気に入り</div>
-            <% end %>
-          <% end %>
+           <%= render 'favorites/favorite-btn', post: post %>
         </div>
       <% end %>
     </div>

@@ -1,4 +1,3 @@
 class AddevaluationToPosts < ActiveRecord::Migration[5.2]
-  def change
-  end
+  def change; end
 end
