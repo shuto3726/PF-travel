@@ -8,7 +8,7 @@
           <%= render "devise/shared/error_messages", resource: resource %>
           <div class="form-group text-center mb-5">
             <%= f.label :新しいメールアドレス, class: "mb-0" %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-75" %>
+            <%= f.email_field :email, required: true, autofocus: true, autocomplete: "email", class: "w-75" %>
           </div>
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

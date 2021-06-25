@@ -1,0 +1,24 @@
+<div class="card mx-auto w-75 text-center">
+  <%= form_with model:post, local:true do |f| %>
+    <div class="form-group mt-4">
+      <%= f.label :画像, class: "mb-0" %><br />
+      <%= f.attachment_field :image %>
+    </div>
+    <div class="form-group">
+      <%= f.label :スポット名, class: "mb-0" %><br />
+      <%= f.text_field :place, required: true, class: "w-75" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :紹介文, class: "mb-0" %><br />
+      <%= f.text_area :description, required: true, class: "w-75" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :旅行日と都道府県, class: "mb-0" %><br />
+      <%= f.date_field :date, required: true, class: "w-25" %>
+      <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, include_blank: "選択してください") %>
+    </div>
+    <div class="form-group">
+      <%= f.submit '投稿', class: "btn btn-outline-secondary btn-lg w-50 rounded-pill" %>
+    </div>
+  <% end %>
+</div>

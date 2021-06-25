@@ -1,16 +1,25 @@
 <div class="row">
   <div class="col-2 d-flex justify-content-center left-column">
     <div class="sticky-top sticky-side">
-      <%= render"users/info", users:@users %>
+      <%= render"info", users: @users %>
     </div>
   </div>
+  
   <div class="col-8">
-    <%= render "posts/list", posts: @posts %>
+    <% @posts.each do |post| %>
+      <div class="card w-100 mx-auto mt-4 shadow-lg">
+        <%= render "posts/card_content", post: post %>
+        <div class="row">
+          <%= render "posts/card_action", post: post %>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @posts %>
   </div>
 
   <div class="col-2 right-column">
     <p>都道府県一覧</p>
-    <%= render "posts/prefectures", posts:@posts %>
+    <%= render "posts/prefectures", posts: @posts %>
   </div>
 </div>
-<%= render "posts/evaluation", posts:@posts %>
+<%= render "posts/evaluation", posts: @posts %>

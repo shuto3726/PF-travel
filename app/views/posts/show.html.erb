@@ -4,106 +4,16 @@
       <%= render"users/info", users:@users %>
     </div>
   </div>
-  <div class="col-8 mx-2 mx-sm-auto mt-3">
-    <div class="card mx-auto w-75 text-center">
-      <%= link_to post_path(@post.id), class: "btn btn-link w-100 text-secondary" do %>
-        <object>
-          <%= link_to user_path(@user.id), class: "btn btn-light w-100" do  %>
-            <div>
-              <%= attachment_image_tag @user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg", class: "mt-1 ml-3 mr-3 rounded-circle" %>
-              <%= @post.user.name %>
-            </div>
-          <% end %>
-        </object>
-        <div class="row">
-          <div class="col-4">
-            <%= attachment_image_tag @post, :image, :fill, 100, 100, fallback: "no_image.jpg" %>
-          </div>
-          <div class="col-4 text-left px-0">
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= @post.place%>
-              </h5>
-              <p><%= @post.description %></p>
-              <p><%= @post.date %></p>
-              <table border=0>
-                <tr><td>
-              <p class="post-evaluation" data-score="<%= @post.comments.average(:evaluation) %>"></p></td><td style="padding-left:10px;">
-              <p><%= @post.comments.average(:evaluation) %>/5</p></td>
-              </tr>
-              </table>
-            </div>
-          </div>
-          <div class="col-4">
-            <div id="map"></div>
-            <style>
-              #map{
-                height: 150px;
-                width: 200px;
-                margin-top: 20px;
-              }
-            </style>
-          </div>
-        </div>
-      <% end %>
+  <div class="col-8 ">
+    <div class="card w-100 mx-auto mt-4 shadow-lg">
+      <%= render "card_content", post: @post %>
       <div class="row">
-        <% if @post.user == current_user %>
-          <div class="col-3 d-flex justify-content-center pr-0">
-            <%= link_to post_path(@post.id), class: "btn btn-outline-secondary w-100" do %>
-              <div class="far fa-comments"></div>
-              <div>コメント</div>
-            <% end %>
-          </div>
-          <div class="col-3 d-flex justify-content-center p-0">
-            <% if @post.favorited_by?(current_user) %>
-              <%= link_to post_favorites_path(@post), class: "btn btn-outline-secondary w-100", method: :delete do %>
-                <div class="fas fa-heart"><%= @post.favorites.count %></div>
-                <div>お気に入り</div>
-              <% end %>
-            <% else %>
-              <%= link_to post_favorites_path(@post), class: "btn btn-outline-secondary w-100", method: :post do %>
-                <div class="far fa-heart"><%= @post.favorites.count %></div>
-                <div>お気に入り</div>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="col-3 d-flex justify-content-center p-0">
-            <%= link_to edit_post_path(@post), class: "btn btn-outline-secondary w-100" do %>
-              <div class="far fa-edit"></div>
-              <div>編集</div>
-            <% end %>
-          </div>
-          <div class="col-3 d-flex justify-content-center pl-0">
-            <%= link_to post_path(@post), class: "btn btn-outline-secondary w-100", method: :delete do %>
-              <div class="far fa-trash-alt"></div>
-              <div>削除</div>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="col-6 d-flex justify-content-center pr-0">
-            <%= link_to post_path(@post.id), class: "btn btn-outline-secondary w-100" do %>
-              <div class="far fa-comments"></div>
-              <div>コメント</div>
-            <% end %>
-          </div>
-          <div class="col-6 d-flex justify-content-center pl-0">
-            <% if @post.favorited_by?(current_user) %>
-              <%= link_to post_favorites_path(@post), class: "btn btn-outline-secondary w-100", method: :delete do %>
-                <div class="fas fa-heart"><%= @post.favorites.count %></div>
-                <div>お気に入り</div>
-              <% end %>
-            <% else %>
-              <%= link_to post_favorites_path(@post), class: "btn btn-outline-secondary w-100", method: :post do %>
-                <div class="far fa-heart"><%= @post.favorites.count %></div>
-                <div>お気に入り</div>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
+        <%= render "card_action", post: @post %>
       </div>
     </div>
+
     <% @post.comments.each do |comment| %>
-      <div class="card mx-auto w-75 m-2">
+      <div class="card mx-auto w-100 m-2">
         <div>
           <%= link_to user_path(@user.id), class: "btn btn-light w-75 p-0 " do %>
             <div>
@@ -124,11 +34,11 @@
         </div>
       </div>
     <% end %>
-    <div class="card mx-auto w-75 p-3">
+    <div class="card mx-auto w-100 p-3">
       <%= form_with(model:[@post, @comment], local: true) do |f| %>
         <div class="form-group">
           <%= f.label :コメントしてみよう, class: "fas fa-comment-dots" %><br />
-          <%= f.text_field :comment,placeholder: "コメントをここに", class: "w-100" %>
+          <%= f.text_field :comment, required: true, placeholder: "コメントをここに", class: "w-100" %>
           <div id="evaluate_stars">
             <label>評価</label>
           </div>
@@ -146,14 +56,6 @@
 
 <%= render "posts/evaluation", posts:@posts %>
 
-<script>
-  $('#evaluate_stars').raty({
-    starOn: "<%= asset_path('star-on.png') %>",
-    starOff: "<%= asset_path('star-off.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-    scoreName: 'comment[evaluation]'
-  });
-</script>
 
 <script type="text/javascript">
 

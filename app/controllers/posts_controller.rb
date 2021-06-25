@@ -1,14 +1,17 @@
 class PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  
+
   def new
     @post = Post.new
   end
 
   def create
     @post = current_user.posts.new(post_params)
-    @post.save
-    redirect_to posts_path(@post)
+     @post.save
+      redirect_to posts_path(@post)
+    #els
+    #  render "new"
+    #end
   end
 
   def index_by_prefecture
@@ -57,13 +60,13 @@ class PostsController < ApplicationController
       format.js
     end
   end
-  
+
   private
 
   def post_params
     params.require(:post).permit(:image, :place, :description, :date, :latitude, :longitude, :prefecture_id)
   end
-  
+
   def ensure_correct_user
     @post = Post.find(params[:id])
     unless @post.user == current_user

@@ -1,0 +1,40 @@
+<%= link_to post_path(post.id), class: "btn btn-link w-100 text-secondary" do %>
+  <object>
+    <%= link_to user_path(post.user.id), class: "btn btn-light w-100" do  %>
+      <div>
+        <%= attachment_image_tag post.user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg", class: "mt-1 ml-3 mr-3 rounded-circle" %>
+        <%= post.user.name %>
+      </div>
+    <% end %>
+  </object>
+  <div class="row">
+    <div class="col-3">
+      <%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg", class: "w-100" %>
+    </div>
+    <div class="col-5 text-left px-0">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= post.place%>
+        </h5>
+        <p><%= post.description %></p>
+        <p><%= post.date %></p>
+        <table border=0>
+          <tr><td>
+        <p class="post-evaluation" data-score="<%= post.comments.average(:evaluation) %>"></p></td><td style="padding-left:10px;">
+        <p><%= post.comments.average(:evaluation) %>/5</p></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div id="map"></div>
+      <style>
+        #map{
+          height: 150px;
+          width: 200px;
+          margin-top: 20px;
+        }
+      </style>
+    </div>
+  </div>
+<% end %>
