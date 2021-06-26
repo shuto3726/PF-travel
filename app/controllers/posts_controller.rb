@@ -7,11 +7,11 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-     @post.save
-      redirect_to posts_path(@post)
-    #els
-    #  render "new"
-    #end
+    if @post.save
+      redirect_to posts_path(@post), notice: "新しく投稿されました！"
+    else
+      render "new"
+    end
   end
 
   def index_by_prefecture
@@ -44,9 +44,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to post_path(post)
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: "投稿が編集されました！"
+    else
+      render "edit"
+    end
   end
 
   def destroy

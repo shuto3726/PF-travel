@@ -8,7 +8,7 @@
   </thead>
   <tbody>
     <% users.each do |user| %>
-        <tr class="clickable-row" data-href="/users/:id">
+        <tr class="clickable-row" data-href="<%= user_path(user) %>">
           <td class="pt-1">
             <%= attachment_image_tag user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle" %>
           </td>
@@ -30,7 +30,7 @@
 </table>
 
 <script>
-  $(function($) {
+  $(function() {
     $(".clickable-row").css("cursor","pointer").click(function() {
       location.href = $(this).data("href");
     });

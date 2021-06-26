@@ -19,3 +19,11 @@
 //= require_tree.
 //= require jquery
 //= require jquery.raty.js
+//= require skippr.min.js
+//= require homes.js
+
+
+$(function(){
+  setTimeout("$('.flash').fadeOut('slow')", 1500);
+})
+

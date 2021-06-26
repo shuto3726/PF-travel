@@ -4,13 +4,13 @@
         <%= render"users/info", users: @users %>
       </div>
     </div>
-    <div class="col-8">
+    <div class="main-column col-8">
       お気に入り一覧
       <% @posts.each do |post| %>
         <div class="card w-100 mx-auto mt-4 shadow-lg">
-          <%= render "card_content", post: post %>
+          <%= render "posts/card_content", post: post %>
           <div class="row">
-            <%= render "card_action", post: post %>
+            <%= render "posts/card_action", post: post %>
           </div>
         </div>
         <%= paginate @posts %>

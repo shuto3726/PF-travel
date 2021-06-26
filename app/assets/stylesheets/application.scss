@@ -38,3 +38,47 @@ a {
   border-left: solid;
   border-width: 1px;
 }
+
+.main-column {
+  padding: 0px 15px 50px;
+}
+
+.content, .comment-main, .comment-form {
+  color: #606060;
+
+}
+
+
+.action {
+  border: 1px solid #FF8C00;
+  border-top: 2px solid #FF8C00;;
+  padding-left: 0;
+  color:  #808080;
+}
+
+.action:hover, .content:hover {
+  color: #000;
+  background-color: #F5F5F5;
+}
+
+.prefecture, .info {
+  color: #FF8C00;
+}
+
+.footer-fixed {
+  min-height: 100vh;
+  position: relative;
+
+  box-sizing: border-box;
+}
+
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.card {
+  color: #606060;
+  border: 2px solid #FF8C00;
+}

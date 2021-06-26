@@ -1,6 +1,7 @@
+ <%= render "searches/search_form" %>
 <% @prefectures.each do |prefecture| %>
   <div>
-    <%= link_to prefecture.name, index_by_prefecture_posts_path(prefecture_id: prefecture.id) %>
+    ・<%= link_to prefecture.name, index_by_prefecture_posts_path(prefecture_id: prefecture.id), class: "prefecture" %>
     (<%= Post.where(prefecture_id: prefecture.id).count %>)
   </div>
 <% end %>

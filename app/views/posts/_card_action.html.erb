@@ -1,6 +1,6 @@
 <% if post.user == current_user %>
   <div class="col-3 d-flex justify-content-center pr-0">
-    <%= link_to post_path(post.id), class: "btn btn-outline-secondary w-100" do %>
+    <%= link_to post_path(post.id), class: "action w-100 text-center" do %>
       <div class="far fa-comments"><%= post.comments.count %></div>
       <div>コメント</div>
     <% end %>
@@ -9,20 +9,20 @@
     <%= render 'favorites/favorite-btn', post: post %>
   </div>
   <div class="col-3 d-flex justify-content-center p-0">
-    <%= link_to edit_post_path(post), class: "btn btn-outline-secondary w-100" do %>
+    <%= link_to edit_post_path(post), class: "action w-100 text-center" do %>
       <div class="far fa-edit"></div>
       <div>編集</div>
     <% end %>
   </div>
   <div class="col-3 d-flex justify-content-center pl-0">
-    <%= link_to post_path(post), class: "btn btn-outline-secondary w-100", method: :delete do %>
+    <%= link_to post_path(post), class: "action w-100 text-center", method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} do %>
       <div class="far fa-trash-alt"></div>
       <div>削除</div>
     <% end %>
   </div>
 <% else %>
   <div class="col-6 d-flex justify-content-center pr-0">
-    <%= link_to post_path(post.id), class: "btn btn-outline-secondary w-100" do %>
+    <%= link_to post_path(post.id), class: "action w-100 text-center" do %>
       <div class="far fa-comments"><%= post.comments.count %></div>
       <div>コメント</div>
     <% end %>

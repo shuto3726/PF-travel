@@ -1,6 +1,6 @@
-<%= link_to post_path(post.id), class: "btn btn-link w-100 text-secondary" do %>
+<%= link_to post_path(post.id), class: "content w-100" do %>
   <object>
-    <%= link_to user_path(post.user.id), class: "btn btn-light w-100" do  %>
+    <%= link_to user_path(post.user.id), class: "btn btn-light text-secondary w-100" do  %>
       <div>
         <%= attachment_image_tag post.user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg", class: "mt-1 ml-3 mr-3 rounded-circle" %>
         <%= post.user.name %>
@@ -9,7 +9,7 @@
   </object>
   <div class="row">
     <div class="col-3">
-      <%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg", class: "w-100" %>
+      <%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg", class: "w-100 ml-1" %>
     </div>
     <div class="col-5 text-left px-0">
       <div class="card-body">
@@ -30,9 +30,9 @@
       <div id="map"></div>
       <style>
         #map{
-          height: 150px;
-          width: 200px;
-          margin-top: 20px;
+          height: 200px;
+          width: 350px;
+          margin-top: 30px;
         }
       </style>
     </div>

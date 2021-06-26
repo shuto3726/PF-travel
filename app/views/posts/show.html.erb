@@ -4,7 +4,7 @@
       <%= render"users/info", users:@users %>
     </div>
   </div>
-  <div class="col-8 ">
+  <div class="main-column col-8">
     <div class="card w-100 mx-auto mt-4 shadow-lg">
       <%= render "card_content", post: @post %>
       <div class="row">
@@ -13,7 +13,7 @@
     </div>
 
     <% @post.comments.each do |comment| %>
-      <div class="card mx-auto w-100 m-2">
+      <div class="card comment-main mx-auto w-100 m-2">
         <div>
           <%= link_to user_path(@user.id), class: "btn btn-light w-75 p-0 " do %>
             <div>
@@ -28,23 +28,22 @@
           <div class="post-evaluation" data-score="<%= comment.evaluation %>"></div>
           <% if comment.user == current_user %>
           <div class="comment-delete m-2 float-right">
-            <%= link_to "削除", post_comment_path(comment.post,comment), method: :delete, class: "btn btn-outline-dark" %>
+            <%= link_to "削除", post_comment_path(comment.post,comment), class: "btn btn-outline-dark", method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %>
           </div>
           <% end %>
         </div>
       </div>
     <% end %>
-    <div class="card mx-auto w-100 p-3">
+    <div class="card comment-form mx-auto w-100 p-3">
       <%= form_with(model:[@post, @comment], local: true) do |f| %>
         <div class="form-group">
-          <%= f.label :コメントしてみよう, class: "fas fa-comment-dots" %><br />
-          <%= f.text_field :comment, required: true, placeholder: "コメントをここに", class: "w-100" %>
+          <%= f.text_field :comment, required: true, placeholder: "コメント", class: "w-100" %>
           <div id="evaluate_stars">
             <label>評価</label>
           </div>
         </div>
-        <div class="action">
-          <%= f.submit "送信する", class: "btn btn-outline-dark" %>
+        <div class="form-group">
+          <%= f.submit "送信する", class: "btn btn-outline-secondary" %>
         </div>
       <% end %>
     </div>

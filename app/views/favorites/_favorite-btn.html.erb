@@ -1,10 +1,10 @@
 <% if post.favorited_by?(current_user) %>
-  <%= link_to post_favorites_path(post), class: "btn btn-outline-secondary w-100", method: :delete, remote: true do %>
-    <div class="fas fa-heart"><%= post.favorites.count %></div>
+  <%= link_to post_favorites_path(post), class: "favorite-btn action w-100 text-center", method: :delete, remote: true do %>
+    <div class="fas fa-heart text-danger"><%= post.favorites.count %></div>
     <div>お気に入り</div>
   <% end %>
 <% else %>
-  <%= link_to post_favorites_path(post), class: "btn btn-outline-secondary w-100", method: :post, remote: true do %>
+  <%= link_to post_favorites_path(post), class: "favorite-btn action w-100 text-center", method: :post, remote: true do %>
     <div class="far fa-heart"><%= post.favorites.count %></div>
     <div>お気に入り</div>
   <% end %>
