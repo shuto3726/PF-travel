@@ -9,18 +9,18 @@ Rails.application.routes.draw do
     collection do
       get 'index_by_prefecture'
     end
-    resources :comments, only: %i[create destroy]
-    resource :favorites, only: %i[create]
-    resources :favorites, only: %i[destroy]
+    resources :comments, only: %i(create destroy)
+    resource :favorites, only: %i(create)
+    resources :favorites, only: %i(destroy)
   end
 
   get '/map_request', to: 'maps#map', as: 'map_request'
 
-  resources :users, only: %i[index show edit update destroy] do
+  resources :users, only: %i(index show edit update destroy) do
     member do
       get :favorites
     end
-    resource :relationships, only: %i[create destroy]
+    resource :relationships, only: %i(create destroy)
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
   end

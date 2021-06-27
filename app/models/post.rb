@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   attachment :image
-  #validates :image, presence: true
+  # validates :image, presence: true
   validates :place, presence: true, length: { in: 1..20 }
   validates :description, presence: true, length: { maximum: 200 }
   validates :date, presence: true
@@ -16,14 +16,15 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
+
   def self.search_for(content, method)
     if method == 'perfect'
       Post.where(place: content)
     elsif method == 'forward'
-      Post.where('place LIKE ?', content+'%')
+      Post.where('place LIKE ?', content + '%')
     elsif method == 'backward'
-      Post.where('place LIKE ?', '%'+content)
-    
+      Post.where('place LIKE ?', '%' + content)
+
     end
   end
 end
