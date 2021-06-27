@@ -1,1 +1,2 @@
-$(".favorite-btn").html("<%= j(render 'favorites/favorite-btn', post: @post) %>");
+$(".post_id_<%= @post.id %>").children()[0].remove();
+$(".post_id_<%= @post.id %>").html("<%= j(render 'favorites/favorite-btn', post: @post) %>");

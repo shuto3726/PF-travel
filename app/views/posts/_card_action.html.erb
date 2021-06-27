@@ -5,7 +5,7 @@
       <div>コメント</div>
     <% end %>
   </div>
-  <div class="col-3 d-flex justify-content-center p-0">
+  <div class="col-3 d-flex justify-content-center p-0 post_id_<%= post.id %>">
     <%= render 'favorites/favorite-btn', post: post %>
   </div>
   <div class="col-3 d-flex justify-content-center p-0">
@@ -27,7 +27,7 @@
       <div>コメント</div>
     <% end %>
   </div>
-  <div class="col-6 d-flex justify-content-center pl-0">
+  <div class="col-6 d-flex justify-content-center pl-0 post_id_<%= post.id %>">
      <%= render 'favorites/favorite-btn', post: post %>
   </div>
 <% end %>

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       get 'index_by_prefecture'
     end
     resources :comments, only: %i[create destroy]
-    resource :favorites, only: %i[create destroy]
+    resource :favorites, only: %i[create]
+    resources :favorites, only: %i[destroy]
   end
 
   get '/map_request', to: 'maps#map', as: 'map_request'

@@ -13,17 +13,19 @@
     </div>
     <div class="col-5 text-left px-0">
       <div class="card-body">
-        <h5 class="card-title">
+        <h2 class="card-title">
           <%= post.place%>
-        </h5>
+        </h2>
         <p><%= post.description %></p>
-        <p><%= post.date %></p>
         <table border=0>
-          <tr><td>
-        <p class="post-evaluation" data-score="<%= post.comments.average(:evaluation) %>"></p></td><td style="padding-left:10px;">
-        <p><%= post.comments.average(:evaluation) %>/5</p></td>
+        <tr>
+          <td>
+            <p class="post-evaluation" data-score="<%= post.comments.average(:evaluation) %>"></p></td><td style="padding-left:10px;">
+            <p><%= post.comments.average(:evaluation) %>/5</p>
+          </td>
         </tr>
         </table>
+        <p>旅行日：<%= post.date %></p>
       </div>
     </div>
     <div>

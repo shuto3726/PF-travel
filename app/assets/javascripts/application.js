@@ -17,7 +17,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree.
-//= require jquery
+
 //= require jquery.raty.js
 //= require skippr.min.js
 //= require homes.js
