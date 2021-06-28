@@ -1,0 +1,35 @@
+<% post.comments.each do |comment| %>
+  <div class="card comment-main mx-auto w-100 m-2">
+    <div>
+      <%= link_to user_path(@user.id), class: "btn btn-light w-75 p-0 " do %>
+        <div>
+          <%= attachment_image_tag @user, :profile_image, size: "40x40", format: 'jpeg', fallback: "no_image.jpg", class: "mt-1 ml-3 mr-3 rounded-circle" %>
+          <%= comment.user.name %>
+        </div>
+      <% end %>
+      <%= comment.created_at.strftime('%Y/%m/%d') %>
+    </div>
+    <div class="card-text mx-3">
+      <%= comment.comment %>
+      <div class="post-evaluation" data-score="<%= comment.evaluation %>"></div>
+      <% if comment.user == current_user %>
+      <div class="comment-delete m-2 float-right">
+        <%= link_to "削除", post_comment_path(comment.post,comment), class: "btn btn-outline-dark", method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<div class="card comment-form mx-auto w-100 p-3">
+  <%= form_with(model:[@post, @comment], local: true) do |f| %>
+    <div class="form-group">
+      <%= f.text_field :comment, required: true, placeholder: "コメント", class: "w-100" %>
+      <div id="evaluate_stars">
+        <label>評価</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.submit "送信する", class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>
+</div>
