@@ -27,3 +27,6 @@
 * 旅行後の共有や思い出の記録として残したい時。
 
 ---
+### 使用素材
+*O-DAN (https://o-dan.net/ja/)
+*ICOOON MONO(https://icooon-mono.com/)
