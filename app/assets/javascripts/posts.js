@@ -6,7 +6,9 @@ $(function(){
     score: function() {
       return $(this).attr('data-score');
     },
-    path: '/assets/'
+    starOn: $('#star-on-image-tag').val(),
+    starOff: $('#star-off-image-tag').val(),
+    starHalf: $('#star-half-image-tag').val(),
   });
 
 

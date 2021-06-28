@@ -36,7 +36,7 @@ class PostsController < ApplicationController
     @user = current_user
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @prefectures = Prefecture.all
+    @prefectures = Prefecture.order(:id)
   end
 
   def edit
