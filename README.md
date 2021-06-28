@@ -1,24 +1,30 @@
-# README
+# travel sharing
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+* 実際に行ったおすすめの旅行先を投稿して共有するサイトです。
+* 都道府県ごと検索できるようにしています。
+* コメントやお気に入り、ランキング機能などで実用性の向上をしています。
 
-Things you may want to cover:
+---
+### サイトテーマ
+旅行のおすすめ地を共有しながら、思い出としても記録ができます。
 
-* Ruby version
+---
 
-* System dependencies
+### テーマを選んだ理由
+* 旅行に行く場所を決める際に実際に行った人の意見を聞いてみたいと思いました。
+* 自分が過去に行った場所を残しておきたいと思いました。
 
-* Configuration
+---
 
-* Database creation
+### ターゲットユーザ
+* 旅行に行く場所を探している人。
+* 都道府県のごとの観光地を知りたい人。
+* 旅行に行った先を思い出として残したい、共有したい人。
 
-* Database initialization
+---
+### 主な利用シーン
+* 旅行先を探している時、実際に行った人のおすすめや感想を知りたい時。
+* 旅行後の共有や思い出の記録として残したい時。
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+---
