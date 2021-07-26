@@ -27,6 +27,10 @@
 * 旅行後の共有や思い出の記録として残したい時。
 
 ---
+## チャレンジ要素一覧
+https://docs.google.com/spreadsheets/d/1M8pMyIukK5JRng8nDZDInwbMkGJdexn9n0P4SgL2QLo/edit?usp=sharing
+
+---
 ### 開発環境
 * OS：Amazon Linux release 2 (Karoo)
 * 言語：HTML,CSS,JavaScript,Ruby,SQL
