@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   attachment :image
-  
+
   validates :image, presence: true
   validates :place, presence: true, length: { in: 1..20 }
   validates :description, presence: true, length: { maximum: 200 }
@@ -25,7 +25,8 @@ class Post < ApplicationRecord
       Post.where('place LIKE ?', content + '%')
     elsif method == 'backward'
       Post.where('place LIKE ?', '%' + content)
-
+    else
+      Post.where('place LIKE ?', '%'+content+'%')
     end
   end
 end
